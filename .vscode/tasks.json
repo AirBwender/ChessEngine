@@ -6,11 +6,15 @@
       "type": "shell",
       "command": "g++",
       "args": [
+        "-std=c++17",
+        "-Wall",
+        "-Wextra",
+        "-O2",
+        "src/*.cpp",
         "main.cpp",
-        "src/board.cpp",
         "-o",
         "chess.exe"
-      ],
+        ],
       "group": {
         "kind": "build",
         "isDefault": true
