@@ -9,15 +9,19 @@ using namespace std;
 
 Board::Board() {
     int start[64] = {
-        BR, BN, BB, BQ, BK, BB, BN, BR,
-        BP, BP, BP, BP, BP, BP, BP, BP,
-        EMPTY, EMPTY, EMPTY, EMPTY,
-        EMPTY, EMPTY, EMPTY, EMPTY,
-        EMPTY, EMPTY, EMPTY, EMPTY,
-        EMPTY, EMPTY, EMPTY, EMPTY,
+        WR, WN, WB, WQ, WK, WB, WN, WR,
         WP, WP, WP, WP, WP, WP, WP, WP,
-        WR, WN, WB, WQ, WK, WB, WN, WR
+
+        EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
+        EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
+        EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
+        EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
+
+        BP, BP, BP, BP, BP, BP, BP, BP,
+        BR, BN, BB, BQ, BK, BB, BN, BR
     };
+
+
 
     for(int i=0;i<64;i++)
         squares[i] = start[i];
@@ -29,7 +33,7 @@ void Board::print() {
 
     const char* names = ".PNBRQKpnbrqk";
 
-    for(int r = 7; r >= 0; r--) {
+    for(int r = 0; r < 8; r++) {
         for(int c = 0; c < 8; c++) {
 
             int piece = squares[r*8 + c];
@@ -92,7 +96,7 @@ vector<Move> generatePawn(Board &b, int sq) {
 
     vector<Move> moves;
 
-    int dir = b.whiteToMove ? -8 : 8;
+    int dir = b.whiteToMove ? 8 : -8;
     int to = sq + dir;
 
     // ----- forward one -----
@@ -101,8 +105,9 @@ vector<Move> generatePawn(Board &b, int sq) {
 
         // ----- double step -----
         bool startRank =
-            (b.whiteToMove && row(sq) == 6) ||
-            (!b.whiteToMove && row(sq) == 1);
+            (b.whiteToMove && row(sq) == 1) ||
+            (!b.whiteToMove && row(sq) == 6);
+
 
         int to2 = sq + 2*dir;
 
